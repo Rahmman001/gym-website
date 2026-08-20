@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Leo's Gym — Find Your Strength</title>
+  <meta name="description" content="Leo's Gym — Fitness should be accessible to everyone. Personal training, group fitness, and functional conditioning in Springfield."/>
+
+  <!-- Open Graph -->
+  <meta property="og:title"       content="Leo's Gym — Find Your Strength"/>
+  <meta property="og:description" content="No contracts. No hidden fees. Just results. Join Leo's Gym today."/>
+  <meta property="og:type"        content="website"/>
+  <meta property="og:url"         content="https://leosgym.example"/>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+<!-- Skip link -->
+<a href="#main" class="skip">Skip to main content</a>
+
+<!-- ══════════════════════════════════════
+     JOIN MODAL
+══════════════════════════════════════ -->
+<div class="modal-bg" id="join-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal">
+    <button class="modal-close" id="modal-close-btn" aria-label="Close">&times;</button>
+
+    <div id="modal-form-wrap">
+      <p class="modal-eyebrow">Become a Member</p>
+      <h2 class="modal-title" id="modal-title">START<br>TODAY.</h2>
+      <form id="join-form" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="f-first">First Name</label>
+            <input type="text" id="f-first" name="first" placeholder="Alex" required autocomplete="given-name"/>
+          </div>
+          <div class="form-group">
+            <label for="f-last">Last Name</label>
+            <input type="text" id="f-last" name="last" placeholder="Kim" required autocomplete="family-name"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="f-email">Email</label>
+          <input type="email" id="f-email" name="email" placeholder="you@email.com" required autocomplete="email"/>
+        </div>
+        <div class="form-group">
+          <label for="f-phone">Phone (optional)</label>
+          <input type="tel" id="f-phone" name="phone" placeholder="+1 (555) 000-0000" autocomplete="tel"/>
+        </div>
+        <div class="form-group">
+          <label for="f-tier">Membership</label>
+          <select id="f-tier" name="tier" required>
+            <option value="" disabled selected>Choose a plan&hellip;</option>
+            <option value="basic">Basic &mdash; $29/mo</option>
+            <option value="premium">Premium &mdash; $49/mo</option>
+            <option value="elite">Elite &mdash; $79/mo</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn--accent modal-submit" id="modal-submit-btn">
+          Claim My Spot
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M10 5l3 3-3 3"/></svg>
+        </button>
+        <p class="modal-note">No contract. Cancel anytime. First session free.</p>
+      </form>
+    </div>
+
+    <div class="modal-success" id="modal-success" tabindex="-1">
+      <div class="success-icon">&#128170;</div>
+      <h2 class="success-title">YOU'RE IN.</h2>
+      <p class="success-body">Welcome to Leo's Gym. We'll be in touch within 24 hours to confirm your first session and get you set up.<br><br>See you on the floor.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     VIDEO MODAL
+══════════════════════════════════════ -->
+<div class="vid-bg" id="vid-modal" role="dialog" aria-modal="true" aria-label="Gym tour video">
+  <div class="vid-outer">
+    <button class="vid-close" id="vid-close-btn" aria-label="Close video">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg>
+      Close
+    </button>
+    <div class="vid-wrap">
+      <div class="vid-placeholder">
+        <span>&#9654;</span>
+        GYM TOUR
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     HEADER
+══════════════════════════════════════ -->
+<header id="hdr">
+  <div class="nav wrap">
+    <a href="#hero" class="logo" aria-label="Leo's Gym — home">LEO'S GYM</a>
+
+    <ul class="nav-links" role="list" aria-label="Site navigation">
+      <li><a href="#mission"      data-nav="mission">About</a></li>
+      <li><a href="#trainings"    data-nav="trainings">Trainings</a></li>
+      <li><a href="#coaches"      data-nav="coaches">Coaches</a></li>
+      <li><a href="#testimonials" data-nav="testimonials">Testimonials</a></li>
+      <li><a href="#contacts"     data-nav="contacts">Contacts</a></li>
+    </ul>
+
+    <button class="btn nav-cta-d" id="hdr-join">JOIN TODAY</button>
+
+    <button class="ham" id="ham-btn"
+            aria-label="Open navigation menu"
+            aria-expanded="false"
+            aria-controls="mob-nav">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- Mobile drawer -->
+<nav class="mob" id="mob-nav" aria-label="Mobile navigation" aria-hidden="true">
+  <a href="#mission">About</a>
+  <a href="#trainings">Trainings</a>
+  <a href="#coaches">Coaches</a>
+  <a href="#testimonials">Testimonials</a>
+  <a href="#contacts">Contacts</a>
+  <button class="btn" id="mob-join">JOIN TODAY</button>
+</nav>
+
+<!-- ══════════════════════════════════════
+     MAIN
+══════════════════════════════════════ -->
+<main id="main">
+
+  <!-- HERO -->
+  <section id="hero" aria-labelledby="hero-h">
+    <div class="wrap">
+      <p class="hero-eye rv">ACHIEVE YOUR FITNESS GOALS</p>
+      <h1 class="hero-h1 rv d1" id="hero-h">FIND YOUR<br>STRENGTH</h1>
+    </div>
+
+    <div class="hero-img rv d2">
+      <img
+        src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1200&q=80&fit=crop"
+        srcset="
+          https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=640&q=75&fit=crop   640w,
+          https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1024&q=80&fit=crop 1024w,
+          https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1400&q=80&fit=crop 1400w,
+          https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1920&q=85&fit=crop 1920w"
+        sizes="(max-width:480px) calc(100vw - 16px),(max-width:768px) calc(100vw - 28px),(max-width:1024px) calc(100vw - 64px),calc(100vw - 96px)"
+        alt="Athletic woman in neon yellow-green gear sprinting against a concrete wall — explosive kinetic energy"
+        width="1400" height="788" loading="eager" fetchpriority="high"/>
+
+      <div class="hero-ov" aria-hidden="true">INSIDE<br>AND OUT.</div>
+
+      <p class="hero-cap">We are dedicated to helping you achieve your fitness goals and improve your overall health.</p>
+
+      <div class="hero-play">
+        <span aria-hidden="true">3 min</span>
+        <button class="play-c" id="play-btn" aria-label="Watch 3-minute gym tour video">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="#111" aria-hidden="true" focusable="false"><path d="M4 2L14 8L4 14V2Z"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section id="stats" aria-label="Leo's Gym by the numbers">
+    <div class="wrap">
+      <div class="stats-inner rv">
+        <div class="stat">
+          <div class="stat-num">2,400<span class="hi">+</span></div>
+          <div class="stat-label">Active Members</div>
+        </div>
+        <div class="stat-div" aria-hidden="true"></div>
+        <div class="stat">
+          <div class="stat-num">18</div>
+          <div class="stat-label">Expert Coaches</div>
+        </div>
+        <div class="stat-div" aria-hidden="true"></div>
+        <div class="stat">
+          <div class="stat-num">12</div>
+          <div class="stat-label">Years Strong</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIVIDER -->
+  <div class="divider rv" aria-hidden="true">&#10022;</div>
+
+  <!-- MISSION -->
+  <section id="mission" aria-labelledby="mis-h">
+    <h2 class="mis-h rv" id="mis-h">FITNESS SHOULD BE<br>ACCESSIBLE TO EVERYONE.</h2>
+    <p class="mis-p rv d1">At Leo's Gym, no contract means no risk. No hidden fees means no surprises. Just a space built for people who are serious about getting stronger &mdash; whatever that looks like for them.</p>
+    <button class="btn rv d2" id="mis-join">JOIN TODAY</button>
+  </section>
+
+  <!-- TRAININGS -->
+  <section id="trainings" aria-labelledby="train-h">
+    <div class="sec-hdr rv">
+      <h2 class="sec-lbl" id="train-h">TRAININGS</h2>
+      <a href="#trainings" class="see-all" aria-label="See all training programs">
+        SEE ALL
+        <span class="ico-c" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M3 8h10M10 5l3 3-3 3"/></svg>
+        </span>
+      </a>
+    </div>
+
+    <div class="t-cards">
+
+      <article class="tc rv d1" tabindex="0" aria-label="Personal Training">
+        <img
+          src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1200&q=80&fit=crop"
+          srcset="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=640&q=75&fit=crop 640w,https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1024&q=80&fit=crop 1024w,https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1400&q=80&fit=crop 1400w"
+          sizes="(max-width:768px) calc(100vw - 40px),calc(100vw - 96px)"
+          alt="Trainer spotting a woman doing dumbbell shoulder press in a dark gym"
+          width="1400" height="613" loading="lazy"/>
+        <div class="tc-body">
+          <div class="tc-info">
+            <span class="tc-name">Personal Training</span>
+            <span class="tc-desc">One-on-one sessions built around your goals &mdash; strength, weight loss, mobility, or performance. Every plan adjusts as you progress.</span>
+          </div>
+          <span class="arr-btn" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M4 10h12M12 5l5 5-5 5"/></svg>
+          </span>
+        </div>
+      </article>
+
+      <article class="tc rv d2" tabindex="0" aria-label="Group Fitness Classes">
+        <img
+          src="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=1200&q=80&fit=crop"
+          srcset="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=640&q=75&fit=crop 640w,https://images.unsplash.com/photo-1518611012118-696072aa579a?w=1024&q=80&fit=crop 1024w,https://images.unsplash.com/photo-1518611012118-696072aa579a?w=1400&q=80&fit=crop 1400w"
+          sizes="(max-width:768px) calc(100vw - 40px),calc(100vw - 96px)"
+          alt="High-energy group fitness class doing dynamic exercises in a modern industrial gym studio"
+          width="1400" height="613" loading="lazy"/>
+        <div class="tc-body">
+          <div class="tc-info">
+            <span class="tc-name">Group Fitness Classes</span>
+            <span class="tc-desc">High-energy instructor-led classes &mdash; HIIT, strength circuits, and functional conditioning. No class caps hidden behind a higher tier.</span>
+          </div>
+          <span class="arr-btn" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M4 10h12M12 5l5 5-5 5"/></svg>
+          </span>
+        </div>
+      </article>
+
+      <article class="tc rv d3" tabindex="0" aria-label="Functional Training">
+        <img
+          src="https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?w=1200&q=80&fit=crop"
+          srcset="https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?w=640&q=75&fit=crop 640w,https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?w=1024&q=80&fit=crop 1024w,https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?w=1400&q=80&fit=crop 1400w"
+          sizes="(max-width:768px) calc(100vw - 40px),calc(100vw - 96px)"
+          alt="Athlete mid-air doing an explosive kettlebell swing in a gritty concrete functional training facility"
+          width="1400" height="613" loading="lazy"/>
+        <div class="tc-body">
+          <div class="tc-info">
+            <span class="tc-name">Functional Training</span>
+            <span class="tc-desc">Kettlebells, sleds, battle ropes, bodyweight work &mdash; built for real-world strength and conditioning, not just machine reps.</span>
+          </div>
+          <span class="arr-btn" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M4 10h12M12 5l5 5-5 5"/></svg>
+          </span>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- THE CLUB -->
+  <section id="club" aria-labelledby="club-h">
+    <div class="sec-hdr rv">
+      <h2 class="sec-lbl" id="club-h">THE CLUB</h2>
+    </div>
+
+    <div id="tier-list">
+
+      <div class="tier rv">
+        <div class="tier-row" id="t-basic-btn" tabindex="0" role="button" aria-expanded="false" aria-controls="t-basic-body">
+          <div class="tier-l"><span class="spi" aria-hidden="true">&#10022;</span><span class="tier-name">Basic</span></div>
+          <span class="plus-ico" aria-hidden="true">+</span>
+        </div>
+        <div class="tier-body" id="t-basic-body" role="region" aria-labelledby="t-basic-btn">
+          <div class="tier-inner">
+            <div class="tier-price">$29<small>/mo</small></div>
+            <ul class="tier-feats">
+              <li>Full gym floor access (cardio, weights, functional area)</li>
+              <li>Locker room access</li>
+              <li>App-based class booking</li>
+              <li>No contract &mdash; cancel anytime</li>
+            </ul>
+            <div class="tier-cta"><button class="btn" data-tier="basic">Get Basic</button></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tier rv d1">
+        <div class="tier-row" id="t-prem-btn" tabindex="0" role="button" aria-expanded="false" aria-controls="t-prem-body">
+          <div class="tier-l"><span class="spi" aria-hidden="true">&#10022;</span><span class="tier-name">Premium</span></div>
+          <span class="plus-ico" aria-hidden="true">+</span>
+        </div>
+        <div class="tier-body" id="t-prem-body" role="region" aria-labelledby="t-prem-btn">
+          <div class="tier-inner">
+            <div class="tier-price">$49<small>/mo</small></div>
+            <ul class="tier-feats">
+              <li>Everything in Basic</li>
+              <li>Unlimited group fitness classes</li>
+              <li>Sauna &amp; steam room access</li>
+              <li>2 guest passes per month</li>
+            </ul>
+            <div class="tier-cta"><button class="btn" data-tier="premium">Get Premium</button></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tier rv d2">
+        <div class="tier-row" id="t-elite-btn" tabindex="0" role="button" aria-expanded="false" aria-controls="t-elite-body">
+          <div class="tier-l"><span class="spi" aria-hidden="true">&#10022;</span><span class="tier-name">Elite</span></div>
+          <span class="plus-ico" aria-hidden="true">+</span>
+        </div>
+        <div class="tier-body" id="t-elite-body" role="region" aria-labelledby="t-elite-btn">
+          <div class="tier-inner">
+            <div class="tier-price">$79<small>/mo</small></div>
+            <ul class="tier-feats">
+              <li>Everything in Premium</li>
+              <li>1 personal training session per month</li>
+              <li>Priority class booking</li>
+              <li>Access to all Leo's Gym locations</li>
+            </ul>
+            <div class="tier-cta"><button class="btn btn--accent" data-tier="elite">Get Elite</button></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- COACHES -->
+  <section id="coaches" aria-labelledby="coaches-h">
+    <div class="sec-hdr rv">
+      <h2 class="sec-lbl" id="coaches-h">OUR COACHES</h2>
+    </div>
+
+    <div class="coaches-grid">
+
+      <div class="coach-card rv d1">
+        <div class="coach-photo">
+          <img src="assets/images/coach-leo.jpg"
+               alt="Leo Marconi — Head Coach and Founder, arms crossed in a black athletic shirt"
+               width="600" height="800" loading="lazy"/>
+        </div>
+        <div class="coach-info">
+          <h3 class="coach-name">Leo Marconi</h3>
+          <p class="coach-role">Head Coach &amp; Founder &middot; Strength &amp; Conditioning</p>
+          <p class="coach-bio">12 years building the gym he always wanted &mdash; one where every member is a name, not a number. NSCA-CSCS certified. Competed nationally in powerlifting for 8 years.</p>
+          <button class="coach-link" data-tier="elite">Book a session <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 7h10M8 4l3 3-3 3"/></svg></button>
+        </div>
+      </div>
+
+      <div class="coach-card rv d2">
+        <div class="coach-photo">
+          <img src="assets/images/coach-kira.jpg"
+               alt="Kira Santos — Lead Personal Trainer wearing neon yellow-green top, confident smile, arms crossed"
+               width="600" height="800" loading="lazy"/>
+        </div>
+        <div class="coach-info">
+          <h3 class="coach-name">Kira Santos</h3>
+          <p class="coach-role">Lead PT &middot; Functional Movement Specialist</p>
+          <p class="coach-bio">Former competitive gymnast turned movement coach. Specialises in corrective exercise, mobility work, and building programs that actually hold up outside the gym.</p>
+          <button class="coach-link" data-tier="premium">Book a session <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 7h10M8 4l3 3-3 3"/></svg></button>
+        </div>
+      </div>
+
+      <div class="coach-card rv d3">
+        <div class="coach-photo">
+          <img src="assets/images/coach-devon.jpg"
+               alt="Devon Clarke — Group Classes Director, focused expression in a gray athletic shirt"
+               width="600" height="800" loading="lazy"/>
+        </div>
+        <div class="coach-info">
+          <h3 class="coach-name">Devon Clarke</h3>
+          <p class="coach-role">Group Classes Director &middot; HIIT &amp; Endurance</p>
+          <p class="coach-bio">Built the group programme from 3 classes a week to a full daily schedule. His HIIT and conditioning sessions are the ones people warn you about &mdash; in the best way.</p>
+          <button class="coach-link" data-tier="basic">Book a session <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 7h10M8 4l3 3-3 3"/></svg></button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- DARK / CLOSING -->
+  <section id="dark" aria-labelledby="cls-h">
+    <span class="cls-spark rv" aria-hidden="true">&#10022;</span>
+    <h2 class="cls-h rv d1" id="cls-h">YOUR BODY IS<br>YOUR TEMPLE.</h2>
+    <p class="cls-p rv d2">Every rep, every set, every drop of sweat is an investment in yourself. Stop waiting for the right moment. This is it.</p>
+    <div class="cls-cta rv d3">
+      <button class="btn btn--w" id="dark-join">JOIN TODAY</button>
+    </div>
+
+    <!-- TESTIMONIALS -->
+    <section id="testimonials" aria-label="Member testimonials">
+      <div class="t-track" role="list">
+        <div class="t-card" role="listitem">
+          <div class="t-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="t-q">&ldquo;I absolutely love this gym! The energy here keeps me coming back every single day.&rdquo;</p>
+          <span class="t-a">&mdash; Alex K.</span>
+        </div>
+        <div class="t-card" role="listitem">
+          <div class="t-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="t-q">&ldquo;Great place to work out &mdash; clean, never overcrowded, and the trainers actually know your name.&rdquo;</p>
+          <span class="t-a">&mdash; Jordan M.</span>
+        </div>
+        <div class="t-card" role="listitem">
+          <div class="t-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="t-q">&ldquo;Love it! Big difference from my old gym &mdash; no surprise charges, ever. Exactly what was advertised.&rdquo;</p>
+          <span class="t-a">&mdash; Priya S.</span>
+        </div>
+        <div class="t-card" role="listitem">
+          <div class="t-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="t-q">&ldquo;This is the place if you&rsquo;re serious about getting stronger. Results in six weeks. No fluff.&rdquo;</p>
+          <span class="t-a">&mdash; Sam T.</span>
+        </div>
+        <div class="t-card" role="listitem">
+          <div class="t-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="t-q">&ldquo;Leo&rsquo;s coaching approach is different. He builds programs for real life, not just the gym floor.&rdquo;</p>
+          <span class="t-a">&mdash; Marcus R.</span>
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <!-- JOIN SECTION -->
+  <section id="join" aria-labelledby="join-h">
+    <div class="wrap" style="max-width:680px;">
+      <p class="join-eye rv">No contract. No hidden fees.</p>
+      <h2 class="join-h rv d1" id="join-h">READY TO<br>START?</h2>
+      <p class="join-p rv d2">Pick your plan, fill in your details, and we&rsquo;ll have you on the floor within 48 hours. Your first session is on us.</p>
+      <button class="btn btn--accent rv d3" id="join-open-btn" style="font-size:14px;padding:16px 48px;">
+        CLAIM YOUR FREE SESSION
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M10 5l3 3-3 3"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- CONTACTS -->
+  <section id="contacts" aria-labelledby="contacts-h">
+    <div class="sec-hdr rv" style="margin-bottom:40px;">
+      <h2 class="sec-lbl" id="contacts-h">FIND US</h2>
+    </div>
+    <div class="contacts-grid">
+      <div class="contacts-info rv">
+        <h3>Come Train<br>With Us.</h3>
+        <div class="c-item">
+          <div class="c-ico" aria-hidden="true">&#128205;</div>
+          <div class="c-text">
+            <span class="c-label">Address</span>
+            <span class="c-val">145 Ironline Ave, Springfield, ST 00000</span>
+          </div>
+        </div>
+        <div class="c-item">
+          <div class="c-ico" aria-hidden="true">&#128222;</div>
+          <div class="c-text">
+            <span class="c-label">Phone</span>
+            <span class="c-val"><a href="tel:+15550102938">(555) 010-2938</a></span>
+          </div>
+        </div>
+        <div class="c-item">
+          <div class="c-ico" aria-hidden="true">&#9993;</div>
+          <div class="c-text">
+            <span class="c-label">Email</span>
+            <span class="c-val"><a href="mailto:hello@leosgym.example">hello@leosgym.example</a></span>
+          </div>
+        </div>
+        <div class="c-item" style="align-items:flex-start;">
+          <div class="c-ico" aria-hidden="true">&#128336;</div>
+          <div class="c-text" style="width:100%;">
+            <span class="c-label" style="margin-bottom:10px;display:block;">Hours</span>
+            <div class="hours-row"><span class="hours-day">Mon &ndash; Fri</span><span class="hours-time">5:00 am &ndash; 11:00 pm</span></div>
+            <div class="hours-row"><span class="hours-day">Saturday</span><span class="hours-time">7:00 am &ndash; 9:00 pm</span></div>
+            <div class="hours-row"><span class="hours-day">Sunday</span><span class="hours-time">7:00 am &ndash; 9:00 pm</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="map-box rv d1">
+        <div class="map-overlay">
+          <div class="map-pin" aria-hidden="true">&#128205;</div>
+          <div class="map-addr">145 Ironline Ave<br>Springfield, ST</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ══════════════════════════════════════
+     FOOTER
+══════════════════════════════════════ -->
+<footer id="footer" role="contentinfo">
+  <div class="wrap">
+    <div class="footer-top">
+
+      <div class="f-brand">
+        <span class="f-logo">LEO'S GYM</span>
+        <p class="f-tagline">Fitness should be accessible to everyone. No contracts. No surprises. Just results.</p>
+      </div>
+
+      <nav class="f-nav" aria-label="Footer navigation">
+        <a href="#mission">About</a>
+        <a href="#trainings">Trainings</a>
+        <a href="#coaches">Coaches</a>
+        <a href="#club">Membership</a>
+        <a href="#testimonials">Testimonials</a>
+        <a href="#contacts">Contacts</a>
+      </nav>
+
+      <div class="f-right">
+        <div class="f-contact-item">145 Ironline Ave<br>Springfield, ST 00000</div>
+        <div class="f-contact-item"><a href="tel:+15550102938">(555) 010-2938</a></div>
+        <div class="f-contact-item"><a href="mailto:hello@leosgym.example">hello@leosgym.example</a></div>
+        <div class="f-social">
+          <a href="#" class="f-soc-btn" aria-label="Leo's Gym on Instagram">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/></svg>
+          </a>
+          <a href="#" class="f-soc-btn" aria-label="Leo's Gym on Facebook">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+          </a>
+          <a href="#" class="f-soc-btn" aria-label="Leo's Gym on X">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="f-bottom">
+      <span class="f-copy">&copy; 2025 Leo&rsquo;s Gym. All rights reserved.</span>
+      <div class="f-legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+        <a href="#">Accessibility</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Scripts — deferred so they don't block render -->
+<script src="js/main.js" defer></script>
+
+</body>
+</html>
