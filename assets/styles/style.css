@@ -88,12 +88,10 @@ ul     { list-style: none; }
 .btn--accent { background: var(--accent); border-color: var(--accent); color: var(--ink); }
 .btn--accent:hover, .btn--accent:focus-visible { background: var(--accent-d); border-color: var(--accent-d); color: var(--ink); box-shadow: 0 8px 28px rgba(212,255,63,.35); }
 
-/* Scroll reveal — initial hidden state. Motion.dev (animations.js) drives
-   the actual reveal with spring physics. .rv.in is an instant fallback for
-   browsers where the Motion.dev ESM import fails. */
+/* Reveal is progressive enhancement: without JavaScript, all content remains visible. */
 @media (prefers-reduced-motion: no-preference) {
-  .rv { opacity: 0; }
-  .rv.in { opacity: 1; }
+  .motion-ready .rv { opacity: 0; transform: translateY(20px); }
+  .motion-ready .rv.in { opacity: 1; transform: none; transition: opacity .6s var(--ease2), transform .6s var(--ease2); }
 }
 /* When reduced-motion is on, show everything immediately */
 @media (prefers-reduced-motion: reduce) {
@@ -219,6 +217,7 @@ ul     { list-style: none; }
 
 .modal-submit { width: 100%; margin-top: 10px; font-size: 12px; padding: 17px; }
 .modal-note   { font-size: 11px; color: var(--muted); text-align: center; margin-top: 14px; line-height: 1.6; letter-spacing: .01em; }
+.form-message { min-height: 1.5em; margin-top: 12px; color: #b42318; font-size: 13px; line-height: 1.5; text-align: center; }
 
 /* Success */
 .modal-success          { display: none; text-align: center; padding: 32px 0; }
@@ -619,6 +618,7 @@ ul     { list-style: none; }
   letter-spacing: -.01em;
 }
 .join-p    { font-size: 16px; color: var(--muted); line-height: 1.8; margin-bottom: 48px; max-width: 480px; margin-left: auto; margin-right: auto; }
+.join-open-btn { padding: 16px 48px; font-size: 14px; }
 
 /* ═══════════════════════════════════════════════════════════════
    CONTACTS
@@ -760,6 +760,7 @@ ul     { list-style: none; }
   .tc-body { padding: 18px; }
   .modal { padding: 36px 22px; }
   .form-row { grid-template-columns: 1fr; }
+  .join-open-btn { padding-inline: 32px; }
   #dark, #testimonials { background-size: 160px 160px; }
 }
 

@@ -21,7 +21,7 @@ on(document, 'keydown', e => {
 ══════════════════════════════════════════════════════════════ */
 const hdr = $('hdr');
 on(window, 'scroll', () => {
-  hdr.classList.toggle('up', window.scrollY > 12);
+  hdr && hdr.classList.toggle('up', window.scrollY > 12);
 }, { passive: true });
 
 /* ══════════════════════════════════════════════════════════════
@@ -51,6 +51,7 @@ const hamBtn = $('ham-btn');
 const mobNav = $('mob-nav');
 
 function setMobNav(open) {
+  if (!hamBtn || !mobNav) return;
   hamBtn.classList.toggle('open', open);
   mobNav.classList.toggle('open', open);
   hamBtn.setAttribute('aria-expanded', String(open));
@@ -62,7 +63,7 @@ on(hamBtn, 'click', () => {
 });
 
 // Close on any link click inside drawer
-mobNav.querySelectorAll('a').forEach(link => on(link, 'click', () => setMobNav(false)));
+mobNav && mobNav.querySelectorAll('a').forEach(link => on(link, 'click', () => setMobNav(false)));
 
 // Focus trap inside mobile drawer
 on(mobNav, 'keydown', e => {
@@ -83,8 +84,20 @@ const joinForm     = $('join-form');
 const formWrap     = $('modal-form-wrap');
 const successPane  = $('modal-success');
 const submitBtn    = $('modal-submit-btn');
+const formMessage  = $('form-message');
+let lastFocused;
+
+function resetJoinModal() {
+  joinForm && joinForm.reset();
+  formWrap && (formWrap.style.display = '');
+  successPane && successPane.classList.remove('show');
+  submitBtn && (submitBtn.disabled = false);
+  formMessage && (formMessage.textContent = '');
+}
 
 function openJoinModal(tier) {
+  lastFocused = document.activeElement;
+  resetJoinModal();
   joinModal.classList.add('open');
   document.body.style.overflow = 'hidden';
   if (tier) {
@@ -97,6 +110,7 @@ function openJoinModal(tier) {
 function closeJoinModal() {
   joinModal.classList.remove('open');
   document.body.style.overflow = '';
+  lastFocused && lastFocused.focus();
 }
 
 // All "JOIN TODAY" buttons + tier CTAs
@@ -113,24 +127,46 @@ on(joinModal, 'click', e => { if (e.target === joinModal) closeJoinModal(); });
 // Focus trap inside join modal
 on(joinModal, 'keydown', e => {
   if (e.key !== 'Tab') return;
-  const visible = el => !el.closest('#modal-success') || successPane.classList.contains('show');
-  const focusable = [...joinModal.querySelectorAll('a,button,input,select,[tabindex="0"]')].filter(visible);
+  const focusable = [...joinModal.querySelectorAll('a,button,input,select,[tabindex="0"]')]
+    .filter(el => el.offsetParent !== null && !el.disabled);
   if (!focusable.length) return;
   const first = focusable[0], last = focusable[focusable.length - 1];
   if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
   else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
 });
 
-// Form submit — demo success state (no backend)
-on(joinForm, 'submit', e => {
+// The backend only needs to set <body data-join-endpoint="/api/memberships">.
+on(joinForm, 'submit', async e => {
   e.preventDefault();
-  submitBtn.textContent = 'Sending…';
+  if (!joinForm.checkValidity()) {
+    joinForm.reportValidity();
+    return;
+  }
+
+  const endpoint = document.body.dataset.joinEndpoint;
+  if (!endpoint) {
+    formMessage.textContent = 'Registration is not available yet. Please contact the gym directly.';
+    return;
+  }
+
   submitBtn.disabled = true;
-  setTimeout(() => {
+  formMessage.textContent = '';
+
+  try {
+    const response = await fetch(endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(Object.fromEntries(new FormData(joinForm))),
+    });
+    if (!response.ok) throw new Error('Registration request failed');
+
     formWrap.style.display = 'none';
     successPane.classList.add('show');
     successPane.querySelector('.success-title') && successPane.querySelector('.success-title').focus();
-  }, 1200);
+  } catch {
+    formMessage.textContent = 'We could not send your request. Please try again shortly.';
+    submitBtn.disabled = false;
+  }
 });
 
 /* ══════════════════════════════════════════════════════════════
@@ -164,7 +200,7 @@ document.querySelectorAll('.tier-row').forEach(row => {
   });
 });
 
-/* Scroll reveal handled by js/animations.js (Motion.dev inView) */
+/* Scroll reveals are handled by the native IntersectionObserver helper. */
 
 /* ══════════════════════════════════════════════════════════════
    TRAINING CARD — keyboard activation

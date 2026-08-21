@@ -4,6 +4,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; img-src 'self' data:; media-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self'; base-uri 'self'; form-action 'self'" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
   <title>Leo's Gym — Find Your Strength</title>
   <meta name="description"
     content="Leo's Gym — Fitness should be accessible to everyone. Personal training, group fitness, and functional conditioning in Springfield." />
@@ -12,7 +15,6 @@
   <meta property="og:title" content="Leo's Gym — Find Your Strength" />
   <meta property="og:description" content="No contracts. No hidden fees. Just results. Join Leo's Gym today." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://leosgym.example" />
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -21,10 +23,10 @@
     rel="stylesheet" />
 
   <!-- Styles -->
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="assets/styles/style.css" />
 </head>
 
-<body>
+<body data-join-endpoint="">
 
   <!-- Skip link -->
   <a href="#main" class="skip">Skip to main content</a>
@@ -39,7 +41,7 @@
       <div id="modal-form-wrap">
         <p class="modal-eyebrow">Become a Member</p>
         <h2 class="modal-title" id="modal-title">START<br>TODAY.</h2>
-        <form id="join-form" novalidate>
+        <form id="join-form">
           <div class="form-row">
             <div class="form-group">
               <label for="f-first">First Name</label>
@@ -74,6 +76,7 @@
               <path d="M3 8h10M10 5l3 3-3 3" />
             </svg>
           </button>
+          <p class="form-message" id="form-message" role="status" aria-live="polite"></p>
           <p class="modal-note">No contract. Cancel anytime. First session free.</p>
         </form>
       </div>
@@ -135,16 +138,11 @@
       </div>
 
       <div class="hero-img rv d2">
-        <img id="hero-poster" src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1200&q=80&fit=crop" srcset="
-          https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=640&q=75&fit=crop   640w,
-          https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1024&q=80&fit=crop 1024w,
-          https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1400&q=80&fit=crop 1400w,
-          https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1920&q=85&fit=crop 1920w"
-          sizes="(max-width:480px) calc(100vw - 16px),(max-width:768px) calc(100vw - 28px),(max-width:1024px) calc(100vw - 64px),calc(100vw - 96px)"
+        <img id="hero-poster" src="assets/images/hero.jpg"
           alt="Athletic woman in neon yellow-green gear sprinting against a concrete wall — explosive kinetic energy"
-          width="1400" height="788" loading="eager" fetchpriority="high" />
+          width="1920" height="1280" loading="eager" fetchpriority="high" decoding="async" />
           
-        <video id="hero-inline-video" src="assets/videos/gym-tour.mp4" controls preload="metadata"></video>
+        <video id="hero-inline-video" src="assets/videos/gym-tour.mp4" controls preload="none"></video>
 
         <div class="hero-ov" aria-hidden="true">INSIDE<br>AND OUT.</div>
 
@@ -213,11 +211,9 @@
       <div class="t-cards">
 
         <article class="tc rv d1" tabindex="0" aria-label="Personal Training" data-idx="01">
-          <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1200&q=80&fit=crop"
-            srcset="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=640&q=75&fit=crop 640w,https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1024&q=80&fit=crop 1024w,https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1400&q=80&fit=crop 1400w"
-            sizes="(max-width:768px) calc(100vw - 40px),calc(100vw - 96px)"
-            alt="Trainer spotting a woman doing dumbbell shoulder press in a dark gym" width="1400" height="613"
-            loading="lazy" />
+          <img src="assets/images/training-personal.jpg"
+            alt="Trainer spotting a woman doing dumbbell shoulder press in a dark gym" width="1400" height="933"
+            loading="lazy" decoding="async" />
           <div class="tc-body">
             <div class="tc-info">
               <span class="tc-name">Personal Training</span>
@@ -234,11 +230,9 @@
         </article>
 
         <article class="tc rv d2" tabindex="0" aria-label="Group Fitness Classes" data-idx="02">
-          <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=1200&q=80&fit=crop"
-            srcset="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=640&q=75&fit=crop 640w,https://images.unsplash.com/photo-1518611012118-696072aa579a?w=1024&q=80&fit=crop 1024w,https://images.unsplash.com/photo-1518611012118-696072aa579a?w=1400&q=80&fit=crop 1400w"
-            sizes="(max-width:768px) calc(100vw - 40px),calc(100vw - 96px)"
+          <img src="assets/images/training-group.jpg"
             alt="High-energy group fitness class doing dynamic exercises in a modern industrial gym studio" width="1400"
-            height="613" loading="lazy" />
+            height="933" loading="lazy" decoding="async" />
           <div class="tc-body">
             <div class="tc-info">
               <span class="tc-name">Group Fitness Classes</span>
@@ -255,11 +249,9 @@
         </article>
 
         <article class="tc rv d3" tabindex="0" aria-label="Functional Training" data-idx="03">
-          <img src="https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?w=1200&q=80&fit=crop"
-            srcset="https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?w=640&q=75&fit=crop 640w,https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?w=1024&q=80&fit=crop 1024w,https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?w=1400&q=80&fit=crop 1400w"
-            sizes="(max-width:768px) calc(100vw - 40px),calc(100vw - 96px)"
+          <img src="assets/images/training-functional.jpg"
             alt="Athlete mid-air doing an explosive kettlebell swing in a gritty concrete functional training facility"
-            width="1400" height="613" loading="lazy" />
+            width="1400" height="2100" loading="lazy" decoding="async" />
           <div class="tc-body">
             <div class="tc-info">
               <span class="tc-name">Functional Training</span>
@@ -474,7 +466,7 @@
         <h2 class="join-h rv d1" id="join-h">READY TO<br>START?</h2>
         <p class="join-p rv d2">Pick your plan, fill in your details, and we&rsquo;ll have you on the floor within 48
           hours. Your first session is on us.</p>
-        <button class="btn btn--accent rv d3" id="join-open-btn" style="font-size:14px;padding:16px 48px;">
+        <button class="btn btn--accent join-open-btn rv d3" id="join-open-btn">
           CLAIM YOUR FREE SESSION
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"
             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -601,9 +593,8 @@
   </footer>
 
   <!-- Scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/motion@11/dist/motion.js"></script>
-  <script src="js/main.js" defer></script>
-  <script src="js/animations.js" defer></script>
+  <script src="assets/scripts/main.js" defer></script>
+  <script src="assets/scripts/animations.js" defer></script>
 
 </body>
 
