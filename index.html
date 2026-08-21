@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
   <meta http-equiv="Content-Security-Policy"
-    content="default-src 'self'; img-src 'self' data:; media-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self'; base-uri 'self'; form-action 'self'" />
+    content="default-src 'self'; img-src 'self' data:; media-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self'; base-uri 'self'; form-action 'self'; connect-src 'self' https://wfhffzfkypqozyasytah.supabase.co" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
   <title>Leo's Gym — Find Your Strength</title>
   <meta name="description"
@@ -15,6 +15,7 @@
   <meta property="og:title" content="Leo's Gym — Find Your Strength" />
   <meta property="og:description" content="No contracts. No hidden fees. Just results. Join Leo's Gym today." />
   <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://leosgym.example" />
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -26,7 +27,7 @@
   <link rel="stylesheet" href="assets/styles/style.css" />
 </head>
 
-<body data-join-endpoint="">
+<body data-join-endpoint="https://wfhffzfkypqozyasytah.supabase.co/functions/v1/create-membership">
 
   <!-- Skip link -->
   <a href="#main" class="skip">Skip to main content</a>
