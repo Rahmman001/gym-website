@@ -13,7 +13,7 @@ const on = (el, ev, fn, opts) => el && el.addEventListener(ev, fn, opts);
 
 /* ── Escape key global ───────────────────────────────────────── */
 on(document, 'keydown', e => {
-  if (e.key === 'Escape') { closeJoinModal(); closeVidModal(); setMobNav(false); }
+  if (e.key === 'Escape') { closeJoinModal(); setMobNav(false); }
 });
 
 /* ══════════════════════════════════════════════════════════════
@@ -136,22 +136,18 @@ on(joinForm, 'submit', e => {
 /* ══════════════════════════════════════════════════════════════
    VIDEO MODAL
 ══════════════════════════════════════════════════════════════ */
-const vidModal  = $('vid-modal');
-const vidClose  = $('vid-close-btn');
+/* ── HERO VIDEO INLINE ────────────────────────────────────────── */
+const heroBox   = document.querySelector('.hero-img');
+const heroVideo = $('hero-inline-video');
 
-function openVidModal() {
-  vidModal.classList.add('open');
-  document.body.style.overflow = 'hidden';
-  setTimeout(() => vidClose && vidClose.focus(), 60);
-}
-function closeVidModal() {
-  vidModal.classList.remove('open');
-  document.body.style.overflow = '';
+function playHeroVideo() {
+  if (heroBox && heroVideo) {
+    heroBox.classList.add('video-active');
+    heroVideo.play().catch(e => console.log('Autoplay prevented', e));
+  }
 }
 
-on($('play-btn'), 'click', openVidModal);
-on(vidClose,      'click', closeVidModal);
-on(vidModal,      'click', e => { if (e.target === vidModal) closeVidModal(); });
+on($('play-btn'), 'click', playHeroVideo);
 
 /* ══════════════════════════════════════════════════════════════
    MEMBERSHIP ACCORDION
@@ -168,24 +164,7 @@ document.querySelectorAll('.tier-row').forEach(row => {
   });
 });
 
-/* ══════════════════════════════════════════════════════════════
-   SCROLL REVEAL
-══════════════════════════════════════════════════════════════ */
-if ('IntersectionObserver' in window) {
-  const revealObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('in');
-        revealObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll('.rv').forEach(el => revealObserver.observe(el));
-} else {
-  // Fallback for older browsers
-  document.querySelectorAll('.rv').forEach(el => el.classList.add('in'));
-}
+/* Scroll reveal handled by js/animations.js (Motion.dev inView) */
 
 /* ══════════════════════════════════════════════════════════════
    TRAINING CARD — keyboard activation
